@@ -35,6 +35,7 @@ class RestCountriesHelper {
 
       $decodedResult = json_decode($jsonResult, true);
 
+      // Sort countries by name and population
       $sortedArray = array_multisort(array_column($decodedResult, 'name'), SORT_NATURAL,array_column($decodedResult, 'population'), SORT_DESC, $decodedResult);
 
       $countries = $decodedResult;
@@ -45,6 +46,7 @@ class RestCountriesHelper {
       $countriesToReturn = array();
       $countryCounter = 0;
 
+      // Make regions and subregions counters
       foreach($countries as $countryArray) {
         $region = $countryArray['region'];
         if(array_key_exists($region,$regions) ){
@@ -72,7 +74,7 @@ class RestCountriesHelper {
           'count' => $count
         ];
       }
-      
+
       $subRegionsArray = array();
       foreach($subRegions as $subRegionName => $count) {
         $subRegionsArray[] = [
